@@ -42,6 +42,13 @@ body {
     background-color: wheat;
     border: 2px solid black;
     border-radius: 10px;
+    transition: all 0.07s ease;
+}
+
+.pressed {
+    transform: scale(1.01);
+    border-color: red;
+    box-shadow: 0 0 1px red;
 }
 
 .button:nth-of-type(1) {
