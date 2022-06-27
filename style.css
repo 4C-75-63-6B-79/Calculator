@@ -8,6 +8,7 @@
 
 body {
     font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
 }
 
 #calculatorContainer {
@@ -20,7 +21,7 @@ body {
 }
 
 #display {
-    height: 160px;
+    /* height: 160px; */
     background-color: lightgreen;
     border: 2px solid black;
     border-radius: 10px;
@@ -32,23 +33,25 @@ body {
 }
 
 #line1 {
-    height: 60px;
+    min-height: 60px;
     padding: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     font-size: 35px;
     font-weight: 700;
     text-align: right;
-    line-height: 60px;
+    /* line-height: 60px; */
+    word-wrap: break-word;
 }
 
 #line2 {
-    height: 80px;
+    min-height: 80px;
     padding: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     font-size: 45px;
     font-weight: 700;
     text-align: right;
-    line-height: 80px;
+    /* line-height: 80px; */
+    word-wrap: break-word;
 }
 
 #buttonContainer {
@@ -64,7 +67,7 @@ body {
     font-weight: 600;
     text-align: center;
     padding: 10px 0;
-    background-color: wheat;
+    background-color: #f5deb3;
     border: 2px solid black;
     border-radius: 10px;
     transition: all 0.07s ease;
@@ -74,6 +77,11 @@ body {
     transform: scale(1.01);
     border-color: red;
     box-shadow: 0 0 2px red;
+}
+
+.active {
+    transform: scale(1.01);
+    background-color: white;
 }
 
 .button:nth-of-type(1) {

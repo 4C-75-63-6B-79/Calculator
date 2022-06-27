@@ -8,17 +8,23 @@ function keyPressEvent(key) {
     key.classList.add('pressed');
 }
 
+function mouseOverEvent(key) {
+    key.classList.add('active');
+}
+
 function endTransition(event){
     if(event.propertyName !== 'transform') {
         return;
-    }
+    } 
     this.classList.remove('pressed');
+    // this.classList.remove('active');
 }
 
 function start() {
     const keys = Array.from(document.querySelectorAll('.button'));
     keys.forEach((key) => key.addEventListener('click', () => keyPressEvent(key)));
     keys.forEach((key) => key.addEventListener('transitionend', endTransition));
+    // keys.forEach((key) => key.addEventListener('mouseover', () => mouseOverEvent(key)));
 
     window.addEventListener('keydown', (event) => {
         const key = document.querySelector(`div[data-code="${event.code}"]`);
@@ -37,6 +43,9 @@ function mainCalculatorFunction(input) {
         currentValue += input;
         document.querySelector('#line2').textContent = currentValue;
     } else if(input == '+' || input == '-' || input == '*' || input == '/'){
+        if(previousValue == '' && currentValue == '') {
+            return;
+        }
         if(currentSymbol == '' && previousSymbol == '') {
             currentSymbol = input;
             previousValue += currentValue;
@@ -58,6 +67,9 @@ function mainCalculatorFunction(input) {
             document.querySelector('#line2').textContent = currentValue;
         } 
     } else if(input == '=') {
+        if(currentSymbol == '=') {
+            return;
+        }
         if(previousValue != '') {
             previousSymbol = currentSymbol;
             currentSymbol = input;
@@ -66,12 +78,27 @@ function mainCalculatorFunction(input) {
             document.querySelector('#line2').textContent = previousValue;
             currentValue = '';
         }
-    }
+    } else {
+        if(input.toLowerCase() == 'clear-all') {
+            currentValue = '';
+            previousValue = '';
+            currentSymbol = '';
+            previousSymbol = '';
+            document.querySelector('#line2').textContent = currentValue;
+            document.querySelector('#line1').textContent = previousValue;
+        } else if(input.toLowerCase() == 'backspace') {
+            currentValue = currentValue.slice(0, currentValue.length-1);
+            document.querySelector('#line2').textContent = currentValue;
+        }
+    } 
 
 }
 
 
 function solve() {
+    if(currentValue == '' || previousValue == '') {
+        return;
+    }
     if(previousSymbol == '+') {
         previousValue = Number(previousValue) + Number(currentValue);
     } else if(previousSymbol == '-') {
@@ -80,6 +107,18 @@ function solve() {
         previousValue = Number(previousValue) * Number(currentValue);
     } else if(previousSymbol == '/') {
         previousValue = Number(previousValue) / Number(currentValue);
+    }
+
+    round();
+}
+
+function round() {
+    var answerLength = previousValue.toString().length;
+    if(answerLength < 12) {
+        return;
+    }
+    if(previousValue.toString().includes('.')) {
+        previousValue = Math.round(previousValue * 1000000000) / 1000000000;
     }
 }
 
