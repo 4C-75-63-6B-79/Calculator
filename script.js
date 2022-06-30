@@ -43,7 +43,7 @@ function mainCalculatorFunction(input) {
         currentValue += input;
         document.querySelector('#line2').textContent = currentValue;
     } else if(input == '+' || input == '-' || input == '*' || input == '/'){
-        if(previousValue == '' && currentValue == '') {
+        if(previousValue === '' && currentValue === '') {
             return;
         }
         if(currentSymbol == '' && previousSymbol == '') {
@@ -96,7 +96,7 @@ function mainCalculatorFunction(input) {
 
 
 function solve() {
-    if(currentValue == '' || previousValue == '') {
+    if(currentValue === '' || previousValue === '') {
         return;
     }
     if(previousSymbol == '+') {
