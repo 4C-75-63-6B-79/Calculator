@@ -70,7 +70,7 @@ function mainCalculatorFunction(input) {
         if(currentSymbol == '=') {
             return;
         }
-        if(previousValue !== '') {
+        if(previousValue !== '' && currentValue !== '') {
             previousSymbol = currentSymbol;
             currentSymbol = input;
             document.querySelector('#line1').textContent = previousValue + previousSymbol + currentValue + currentSymbol;
